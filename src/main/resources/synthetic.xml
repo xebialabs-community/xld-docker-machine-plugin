@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+    Note: If you modify this file, you must restart the XL Deploy server.
+-->
+<synthetic xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd"
+           xmlns="http://www.xebialabs.com/deployit/synthetic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <type type="docker.Machine" extends="udm.BaseProvisioned" container-type="overthere.Host"
+          deployable-type="docker.MachineSpec">
+        <generate-deployable type="docker.MachineSpec" extends="udm.BaseProvisionable"/>
+        <property name="driver" default="virtualbox" description="Driver to create machine with."/>
+        <property name="machineName" required="false"/>
+        <property name="insecureRegistries" kind="list_of_string" required="false"
+                  description="insecure registries to allow with the created engine"/>
+        <property name="engineOptions" kind="set_of_string" required="false" category="Engine"
+                  description="Arbitrary flags to include with the created engine in the form flag=value"/>
+        <property name="engineLabels" kind="set_of_string" required="false" category="Engine"
+                  description="Specify labels for the created engine key=value"/>
+        <property name="docker_host" label="Docker Host" category="Output" required="false"/>
+        <property name="docker_host_address" label="Docker Host Adress" category="Output" required="false"/>
+        <property name="docker_cert_path" label="Docker Certificate Path" category="Output" required="false"/>
+        <property name="docker_tls_verify" label="Docker TLS Verify" category="Output" required="false"/>
+        <property name="docker_certPem" label="Certificate" category="Output" required="false"/>
+        <property name="docker_keyPem" label="Key" category="Output" required="false"/>
+        <property name="docker_caPem" label="CA" category="Output" required="false"/>
+    </type>
+</synthetic>

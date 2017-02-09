@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!--
+    Note: If you modify this file and automatic reloading is disabled in `planner.conf`, you must restart the XL Deploy server.
+-->
+<rules xmlns="http://www.xebialabs.com/xl-deploy/xl-rules">
+  <!-- Docker Machine -->
+    <rule name="docker.machine.Instance.CREATE" scope="deployed">
+        <conditions>
+            <type>docker.Machine</type>
+            <operation>CREATE</operation>
+        </conditions>
+        <steps>
+            <os-script>
+                <order>60</order>
+                <description expression="true">"Create '%s' docker machine using %s" % (deployed.name, deployed.container.name)</description>
+                <script>docker-machine/create</script>
+            </os-script>
+            <checkpoint/>
+            <jython>
+                <description expression="true">"Fetch information about the '%s' Docker machine on '%s' " % (deployed.name,deployed.container.name)
+                </description>
+                <script>docker-machine/fetch-info.py</script>
+                <order>60</order>
+                <jython-context>
+                    <target expression="true">deployed</target>
+                </jython-context>
+            </jython>
+        </steps>
+      </rule>
+
+      <rule name="docker.machine.Instance.MODIFY" scope="deployed">
+        <conditions>
+            <type>docker.Machine</type>
+            <operation>MODIFY</operation>
+            <operation>NOOP</operation>
+        </conditions>
+        <steps>
+            <jython>
+                <description expression="true">"Fetch information about the '%s' Docker machine on '%s' " % (deployed.name,deployed.container.name)
+                </description>
+                <script>docker-machine/fetch-info.py</script>
+                <order>60</order>
+                <jython-context>
+                    <target expression="true">deployed</target>
+                </jython-context>
+            </jython>
+        </steps>
+    </rule>
+
+
+    <rule name="docker.machine.Instance.DESTROY" scope="deployed">
+        <conditions>
+            <type>docker.Machine</type>
+            <operation>DESTROY</operation>
+        </conditions>
+        <steps>
+            <jython>
+                <description expression="true">"Destroy the '%s' Docker machine" % previousDeployed.machineName</description>
+                <order>40</order>
+                <script>docker-machine/destroy.py</script>
+                <jython-context>
+                    <machine_name expression="true">previousDeployed.machineName</machine_name>
+                  </jython-context>
+            </jython>
+        </steps>
+    </rule>
+</rules>
