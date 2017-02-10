@@ -55,3 +55,11 @@ Dependencies:
     <boundTemplates/>
 </udm.ProvisioningPackage>
 ```
+
+# DockerMachineDictionary #
+
+The `docker.machine.DockerMachineDictionary` is a new kind of dictionary that will resolve the ip of all the docker machines relative to the XL Deploy server host.
+The default keu prefix is `MACHINE-` (see `docker.machine.DockerMachineDictionary` hidden property).
+
+
+![Screenshot](docs/docker.machine.DockerMachineDictionary.png)

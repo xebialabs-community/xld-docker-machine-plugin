@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import com.xebialabs.overthere.local.LocalConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.google.common.cache.*;
@@ -18,7 +19,6 @@ import com.google.common.collect.Maps;
 import com.xebialabs.deployit.plugin.api.udm.Dictionary;
 import com.xebialabs.deployit.plugin.api.udm.Metadata;
 import com.xebialabs.deployit.plugin.api.udm.Property;
-import com.xebialabs.deployit.plugin.overthere.Host;
 import com.xebialabs.overthere.CmdLine;
 import com.xebialabs.overthere.OverthereConnection;
 import com.xebialabs.overthere.util.CapturingOverthereExecutionOutputHandler;
@@ -28,9 +28,6 @@ import com.xebialabs.overthere.util.CapturingOverthereExecutionOutputHandler;
         description = "A Dictionary that resolves the docker machine name -> ip"
 )
 public class DockerMachineDictionary extends Dictionary {
-
-    @Property(description = "host on which the docker-* commands will be executed")
-    private Host targetHost;
 
     @Property(description = "prefix used to build the key", defaultValue = "MACHINE-", category = "Advanced")
     private String keyPrefix;
@@ -48,10 +45,11 @@ public class DockerMachineDictionary extends Dictionary {
         logger.debug("dockerMachineLsCommand = " + dockerMachineLsCommand);
         CmdLine cmdLine = new CmdLine();
         cmdLine.addTemplatedFragment(dockerMachineLsCommand);
-        final OverthereConnection remoteConnection = targetHost.getConnection();
+
+        final OverthereConnection connection = LocalConnection.getLocalConnection();
         final CapturingOverthereExecutionOutputHandler out = CapturingOverthereExecutionOutputHandler.capturingHandler();
         final CapturingOverthereExecutionOutputHandler err = CapturingOverthereExecutionOutputHandler.capturingHandler();
-        int returnCode = remoteConnection.execute(out, err, cmdLine);
+        int returnCode = connection.execute(out, err, cmdLine);
         if (returnCode == 0) {
             Map<String, String> machines = Maps.newHashMap();
             for (String line : out.getOutputLines()) {

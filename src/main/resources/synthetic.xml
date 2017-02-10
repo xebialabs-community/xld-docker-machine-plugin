@@ -28,4 +28,11 @@
         <property name="docker_keyPem" label="Key" category="Output" required="false"/>
         <property name="docker_caPem" label="CA" category="Output" required="false"/>
     </type>
+
+    <type-modification type="docker.machine.DockerMachineDictionary">
+        <method name="loadDockerMachines" label="Load the Docker Machines " delegate="jythonScript"
+                script="docker-machine/load-docker-machines-in-dictionary.py">
+        </method>
+    </type-modification>
+
 </synthetic>
