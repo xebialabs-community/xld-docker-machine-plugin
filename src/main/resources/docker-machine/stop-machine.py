@@ -6,10 +6,14 @@
 
 from overtherepy import LocalConnectionOptions, OverthereHost, OverthereHostSession
 from com.xebialabs.overthere import OperatingSystemFamily
+import sys
 
+machine_name = thisCi.machineName
+if machine_name is None:
+    raise ValueError("the 'Machine Name' property is empty")
 
-print "Removing docker '{0}' machine ".format(machine_name)
-command_line = "docker-machine rm --force {0}".format(machine_name)
+print "Stopping docker '{0}' machine ".format(machine_name)
+command_line = "docker-machine stop {0}".format(machine_name)
 
 localOpts = LocalConnectionOptions(os=OperatingSystemFamily.UNIX)
 host = OverthereHost(localOpts)

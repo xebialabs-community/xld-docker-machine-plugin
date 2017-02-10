@@ -35,4 +35,13 @@
         </method>
     </type-modification>
 
+    <type-modification type="docker.Engine">
+        <property name="machineName" required="false" category="Docker Machine"/>
+        <method name="startMachine" label="Start Machine" description="Start the docker machine"
+                delegate="jythonScript" script="docker-machine/start-machine.py"/>
+        <method name="stopMachine" label="Stop Machine" description="Stop the docker machine"
+                delegate="jythonScript" script="docker-machine/stop-machine.py"/>
+    </type-modification>
+
+
 </synthetic>
