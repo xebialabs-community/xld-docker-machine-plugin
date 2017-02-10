@@ -8,8 +8,7 @@
 -->
 
 <rules xmlns="http://www.xebialabs.com/xl-deploy/xl-rules">
-  <!-- Docker Machine -->
-    <rule name="docker.machine.Instance.CREATE" scope="deployed">
+    <rule name="docker.machine.instance.create" scope="deployed">
         <conditions>
             <type>docker.Machine</type>
             <operation>CREATE</operation>
@@ -21,21 +20,13 @@
                 <script>docker-machine/create</script>
             </os-script>
             <checkpoint/>
-            <jython>
-                <description expression="true">"Fetch information about the '%s' Docker machine on '%s' " % (deployed.name,deployed.container.name)
-                </description>
-                <script>docker-machine/fetch-info.py</script>
-                <order>60</order>
-                <jython-context>
-                    <target expression="true">deployed</target>
-                </jython-context>
-            </jython>
         </steps>
       </rule>
 
-      <rule name="docker.machine.Instance.MODIFY" scope="deployed">
+      <rule name="docker.machine.instance.fetch.info" scope="deployed">
         <conditions>
             <type>docker.Machine</type>
+            <operation>CREATE</operation>
             <operation>MODIFY</operation>
             <operation>NOOP</operation>
         </conditions>
@@ -44,7 +35,7 @@
                 <description expression="true">"Fetch information about the '%s' Docker machine on '%s' " % (deployed.name,deployed.container.name)
                 </description>
                 <script>docker-machine/fetch-info.py</script>
-                <order>60</order>
+                <order>61</order>
                 <jython-context>
                     <target expression="true">deployed</target>
                 </jython-context>
@@ -52,8 +43,7 @@
         </steps>
     </rule>
 
-
-    <rule name="docker.machine.Instance.DESTROY" scope="deployed">
+    <rule name="docker.machine.instance.destroy" scope="deployed">
         <conditions>
             <type>docker.Machine</type>
             <operation>DESTROY</operation>
