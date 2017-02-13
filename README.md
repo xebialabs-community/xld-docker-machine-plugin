@@ -51,6 +51,7 @@ Dependencies:
             <certPem>{{%docker_certPem%}}</certPem>
             <keyPem>{{%docker_keyPem%}}</keyPem>
             <caPem>{{%docker_caPem%}}</caPem>
+            <machineName>{{%machineName%}}</machineName>
         </template.docker.Engine>
     </templates>
     <boundTemplates/>
