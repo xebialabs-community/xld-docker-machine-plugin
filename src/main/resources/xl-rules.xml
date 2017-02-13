@@ -16,14 +16,16 @@
         <steps>
             <os-script>
                 <order>60</order>
-                <description expression="true">"Create '%s' docker machine using %s" % (deployed.name, deployed.container.name)</description>
+                <description expression="true">"Create '%s' docker machine using %s" % (deployed.name,
+                    deployed.container.name)
+                </description>
                 <script>docker-machine/create</script>
             </os-script>
             <checkpoint/>
         </steps>
-      </rule>
+    </rule>
 
-      <rule name="docker.machine.instance.fetch.info" scope="deployed">
+    <rule name="docker.machine.instance.fetch.info" scope="deployed">
         <conditions>
             <type>docker.Machine</type>
             <operation>CREATE</operation>
@@ -32,7 +34,8 @@
         </conditions>
         <steps>
             <jython>
-                <description expression="true">"Fetch information about the '%s' Docker machine on '%s' " % (deployed.name,deployed.container.name)
+                <description expression="true">"Fetch information about the '%s' Docker machine on '%s' " %
+                    (deployed.name,deployed.container.name)
                 </description>
                 <script>docker-machine/fetch-info.py</script>
                 <order>61</order>
@@ -50,12 +53,13 @@
         </conditions>
         <steps>
             <jython>
-                <description expression="true">"Destroy the '%s' Docker machine" % previousDeployed.machineName</description>
+                <description expression="true">"Destroy the '%s' Docker machine" % previousDeployed.machineName
+                </description>
                 <order>40</order>
                 <script>docker-machine/destroy.py</script>
                 <jython-context>
                     <machine_name expression="true">previousDeployed.machineName</machine_name>
-                  </jython-context>
+                </jython-context>
             </jython>
         </steps>
     </rule>
