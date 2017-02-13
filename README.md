@@ -15,6 +15,7 @@ It defines 2 control task to start and to stop the docker-machine
 # Installation #
 
 Place the plugin JAR file into your `SERVER_HOME/plugins` directory.
+
 Dependencies:
 
 * XL Deploy 6.0+
