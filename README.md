@@ -6,7 +6,7 @@ It defines 2 control task to start and to stop the docker-machine
 
 # CI status #
 
-[![Build Status][xld-docker-plugin-travis-image]][xld-docker-machine-plugin-travis-url]
+[![Build Status][xld-docker-machine-plugin-travis-image]][xld-docker-machine-plugin-travis-url]
 
 [xld-docker-machine-plugin-travis-image]: https://travis-ci.org/xebialabs-community/xld-docker-machine-plugin.svg?branch=master
 [xld-docker-machine-plugin-travis-url]: https://travis-ci.org/xebialabs-community/xld-docker-machine-plugin
