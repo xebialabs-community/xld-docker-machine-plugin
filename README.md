@@ -1,8 +1,8 @@
 # Overview #
 
 The Docker Machine plugin is a XL Deploy plugin.
-It adds the capability for provision `docker.Engine' using Docker Machines.
-It defines 2 control task to start and to stop the docker-machine
+It adds the capability for provision `docker.Engine' using [Docker Machine](https://docs.docker.com/machine/overview/).
+It defines 2 control tasks to start and to stop the docker-machine
 
 # CI status #
 
