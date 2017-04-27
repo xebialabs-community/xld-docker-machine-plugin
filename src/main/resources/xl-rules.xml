@@ -37,7 +37,17 @@
                 <description expression="true">"Fetch information about the '%s' Docker machine on '%s' " %
                     (deployed.name,deployed.container.name)
                 </description>
-                <script>docker-machine/fetch-info.py</script>
+                <script>docker-machine/fetch_info.py</script>
+                <order>61</order>
+                <jython-context>
+                    <target expression="true">deployed</target>
+                </jython-context>
+            </jython>
+            <jython>
+                <description expression="true">"Load Certificates for the '%s' Docker machine on '%s' " %
+                    (deployed.name,deployed.container.name)
+                </description>
+                <script>docker-machine/load_cert.py</script>
                 <order>61</order>
                 <jython-context>
                     <target expression="true">deployed</target>

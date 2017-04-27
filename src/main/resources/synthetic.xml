@@ -41,6 +41,9 @@
                 delegate="jythonScript" script="docker-machine/start-machine.py"/>
         <method name="stopMachine" label="Stop Machine" description="Stop the docker machine"
                 delegate="jythonScript" script="docker-machine/stop-machine.py"/>
+        <method name="reloadCertificates" label="Reload Certificates" description="Reload the Certificates."
+                delegate="jythonScript" script="docker-machine/reload_cert.py"/>
+
     </type-modification>
 
 
