@@ -59,7 +59,6 @@ print deployed.docker_keyPem
 # cert.pem
 print data['HostOptions']["AuthOptions"]["ServerCertPath"]
 deployed.docker_certPem = read_pem_file_to_string(data['HostOptions']["AuthOptions"]["ClientCertPath"])
-deployed.docker_certPem="============================================================================="
 print deployed.docker_certPem
 
 
